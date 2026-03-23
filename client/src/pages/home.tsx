@@ -1286,6 +1286,10 @@ const STRATEGY_URL_MAP: Record<StrategyKey, string> = {
 
 function getStrategyFromPath(): StrategyKey {
   const path = window.location.pathname.replace(/^\//, "").toLowerCase();
+  if (path && !STRATEGY_SLUG_MAP[path]) {
+    // Redirect unknown slugs to default
+    window.history.replaceState(null, "", "/algo-momentum");
+  }
   return STRATEGY_SLUG_MAP[path] || "basket50";
 }
 
