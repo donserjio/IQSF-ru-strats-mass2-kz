@@ -1043,7 +1043,7 @@ function ZoomableChart({
         </ResponsiveContainer>
       </div>
       {!isZoomed && (
-        <p className="text-[10px] text-muted-foreground/40 text-center mt-2">Click and drag on chart to zoom in</p>
+        <p className="text-[10px] text-muted-foreground/40 text-center mt-2">Нажмите и потяните для увеличения</p>
       )}
     </div>
   );
