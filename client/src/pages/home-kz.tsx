@@ -1341,7 +1341,7 @@ export default function Home() {
             {[
               {
                 num: "01",
-                title: "Diversification",
+                title: "Әртараптандыру",
                 desc: t("15 тәуелсіз сауда жүйесі бір нарық режиміне тәуелділікті азайтады. Сауда BTC және ETH-та — лонг та, шорт та жасалады."),
                 accent: "from-cyan-500/30 to-cyan-600/10",
               },
