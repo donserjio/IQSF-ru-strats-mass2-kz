@@ -563,9 +563,9 @@ function HeroSection({ stats, sc }: { stats?: StatsData; sc: StrategyConfig }) {
           <div>
             <AnimatedSection delay={400}>
               <div className="rounded-2xl border border-border/30 bg-card/30 backdrop-blur-sm p-5 sm:p-6">
-                <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center justify-between mb-4 gap-2">
                   <span className="text-sm text-muted-foreground font-medium">{sc.label}</span>
-                  <span className="text-lg sm:text-xl font-bold text-cyan-400 font-mono">
+                  <span className="text-sm sm:text-base font-bold text-cyan-400 font-mono text-right">
                     Кривая доходности
                   </span>
                 </div>
@@ -579,9 +579,9 @@ function HeroSection({ stats, sc }: { stats?: StatsData; sc: StrategyConfig }) {
                   { label: lang === "kz" ? "Шарп коэф." : "Коэфф. Шарпа", value: getMetricValue(stats?.metrics, "Sharpe", "—") },
                   { label: lang === "kz" ? "Трек-рекорд" : "Трек-рекорд", value: stats?.dateRange ? stats.dateRange.replace(/.*?(\d{4}).*?(\d{4}).*/, "$1–$2") : "—" },
                 ].map((item) => (
-                  <div key={item.label} className="text-center py-5">
-                    <div className="text-lg sm:text-xl font-bold text-foreground font-mono">{item.value}</div>
-                    <div className="text-[10px] text-muted-foreground tracking-wider uppercase mt-1">{item.label}</div>
+                  <div key={item.label} className="text-center py-4 px-1">
+                    <div className="text-sm sm:text-xl font-bold text-foreground font-mono leading-tight">{item.value}</div>
+                    <div className="text-[9px] sm:text-[10px] text-muted-foreground tracking-wide uppercase mt-1 leading-tight">{item.label}</div>
                   </div>
                 ))}
               </div>
