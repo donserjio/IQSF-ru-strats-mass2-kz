@@ -1275,8 +1275,6 @@ function LegalDisclaimerModal() {
 }
 
 const STRATEGY_SLUG_MAP: Record<string, StrategyKey> = {
-  basket50: "basket50",
-  basket70tf: "basket70tf",
   "algo-momentum": "basket50",
   "algo-trend": "basket70tf",
 };
