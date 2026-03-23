@@ -1387,12 +1387,16 @@ const STRATEGY_URL_MAP: Record<StrategyKey, string> = {
 };
 
 function getStrategyFromPath(): StrategyKey {
-  const path = window.location.pathname.replace(/^\//, "").toLowerCase();
-  if (path && !STRATEGY_SLUG_MAP[path]) {
-    // Redirect unknown slugs to default
-    window.history.replaceState(null, "", "/");
+  const rawParts = window.location.pathname.replace(/^\//, "").toLowerCase().split("/").filter(Boolean);
+  let slug = rawParts[0];
+  if (rawParts[0] === "kz" || rawParts[0] === "ru") {
+    slug = rawParts[1] ?? "";
   }
-  return STRATEGY_SLUG_MAP[path] || "basket50";
+  if (slug && !STRATEGY_SLUG_MAP[slug]) {
+    const langPrefix = rawParts[0] === "ru" ? "ru" : "kz";
+    window.history.replaceState(null, "", "/" + langPrefix + "/algo-momentum");
+  }
+  return STRATEGY_SLUG_MAP[slug] || "basket50";
 }
 
 export default function Home() {
@@ -1404,7 +1408,9 @@ export default function Home() {
 
   const setStrategy = useCallback((key: StrategyKey) => {
     setStrategyState(key);
-    setLocation(`/${STRATEGY_URL_MAP[key]}`);
+    const rawParts = window.location.pathname.replace(/^\//, "").split("/").filter(Boolean);
+    const langPrefix = rawParts[0] === "ru" ? "ru" : "kz";
+    setLocation("/" + langPrefix + "/" + STRATEGY_URL_MAP[key]);
   }, [setLocation]);
   const sc = STRATEGIES[strategy];
 

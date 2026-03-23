@@ -150,8 +150,8 @@ const kz: Record<string, string> = {
   "Отказ от ответственности": "Жауапкершіліктен бас тарту",
 };
 
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Language>("ru");
+export function LanguageProvider({ children, defaultLang = "kz" }: { children: ReactNode; defaultLang?: Language }) {
+  const [lang, setLang] = useState<Language>(defaultLang);
   const t = (key: string): string => {
     if (lang === "kz") return kz[key] ?? key;
     return key;
@@ -168,11 +168,25 @@ export function useTranslation() {
 }
 
 export function LanguageSwitcher() {
-  const { lang, setLang } = useTranslation();
+  const { lang } = useTranslation();
+
+  function switchLang(targetLang: Language) {
+    // Extract current strategy from URL
+    const path = window.location.pathname;
+    const parts = path.replace(/^\//, "").split("/").filter(Boolean);
+    let strategy = "algo-momentum";
+    if (parts[0] === "kz" || parts[0] === "ru") {
+      strategy = parts[1] ?? "algo-momentum";
+    } else if (parts[0] === "algo-momentum" || parts[0] === "algo-trend") {
+      strategy = parts[0];
+    }
+    window.location.href = `/${targetLang}/${strategy}`;
+  }
+
   return (
     <div className="flex gap-1 items-center ml-2">
       <button
-        onClick={() => setLang("ru")}
+        onClick={() => switchLang("ru")}
         className={`px-2 py-0.5 text-xs rounded font-semibold transition-colors ${
           lang === "ru"
             ? "bg-cyan-500 text-white"
@@ -183,7 +197,7 @@ export function LanguageSwitcher() {
       </button>
       <span className="text-muted-foreground text-xs">|</span>
       <button
-        onClick={() => setLang("kz")}
+        onClick={() => switchLang("kz")}
         className={`px-2 py-0.5 text-xs rounded font-semibold transition-colors ${
           lang === "kz"
             ? "bg-cyan-500 text-white"
