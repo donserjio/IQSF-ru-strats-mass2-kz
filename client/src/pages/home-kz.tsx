@@ -72,7 +72,7 @@ const STRATEGIES: Record<string, StrategyConfig> = {
   basket50: {
     key: "basket50",
     apiKey: "basket50",
-    label: "Algo Momentum",
+    label: "Basket 50",
     pairs: ["BTC/USDT", "ETH/USDT"],
     approachShort: "Көпжүйелі сандық тәсіл",
     approachFull: "бірнеше сандық модельдің үйлесімі",
@@ -87,7 +87,7 @@ const STRATEGIES: Record<string, StrategyConfig> = {
   basket70tf: {
     key: "basket70tf",
     apiKey: "basket70tf",
-    label: "Algo Trend",
+    label: "Basket 70 TF",
     pairs: ["BTC/USDT", "ETH/USDT"],
     approachShort: "Трендті қадағалау, момент-сүзгілер",
     approachFull: "моментум-эффектісін қолданып трендті қадағалау",
@@ -278,8 +278,8 @@ const NAV_ITEMS_KZ = [
 ];
 
 const STRATEGY_OPTIONS: { key: StrategyKey; label: string }[] = [
-  { key: "basket50", label: "Algo Momentum" },
-  { key: "basket70tf", label: "Algo Trend" },
+  { key: "basket50", label: "Basket 50" },
+  { key: "basket70tf", label: "Basket 70 TF" },
 ];
 
 function Navbar({ strategy, onStrategyChange }: { strategy: StrategyKey; onStrategyChange: (k: StrategyKey) => void }) {
@@ -1402,13 +1402,15 @@ function LegalDisclaimerModal() {
 }
 
 const STRATEGY_SLUG_MAP: Record<string, StrategyKey> = {
+  "basket-50": "basket50",
+  "basket-70-tf": "basket70tf",
   "algo-momentum": "basket50",
   "algo-trend": "basket70tf",
 };
 
 const STRATEGY_URL_MAP: Record<StrategyKey, string> = {
-  basket50: "algo-momentum",
-  basket70tf: "algo-trend",
+  basket50: "basket-50",
+  basket70tf: "basket-70-tf",
 };
 
 function getStrategyFromPath(): StrategyKey {
@@ -1419,7 +1421,7 @@ function getStrategyFromPath(): StrategyKey {
   }
   if (slug && !STRATEGY_SLUG_MAP[slug]) {
     const langPrefix = rawParts[0] === "kz" ? "kz" : "ru";
-    window.history.replaceState(null, "", "/" + langPrefix + "/algo-momentum");
+    window.history.replaceState(null, "", "/" + langPrefix + "/basket-50");
   }
   return STRATEGY_SLUG_MAP[slug] || "basket50";
 }
