@@ -370,17 +370,20 @@ function Navbar({ strategy, onStrategyChange }: { strategy: StrategyKey; onStrat
             <LanguageSwitcher />
           </div>
 
-          <button
-            className="md:hidden p-2 text-foreground ml-auto"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            data-testid="button-mobile-menu"
-          >
+          <div className="md:hidden flex items-center gap-1 ml-auto">
+            <LanguageSwitcher />
+            <button
+              className="p-2 text-foreground"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              data-testid="button-mobile-menu"
+            >
             <div className="w-5 flex flex-col gap-1">
               <span className={`h-0.5 bg-foreground transition-all duration-200 ${mobileOpen ? "rotate-45 translate-y-1.5" : ""}`} />
               <span className={`h-0.5 bg-foreground transition-all duration-200 ${mobileOpen ? "opacity-0" : ""}`} />
               <span className={`h-0.5 bg-foreground transition-all duration-200 ${mobileOpen ? "-rotate-45 -translate-y-1.5" : ""}`} />
             </div>
-          </button>
+            </button>
+          </div>
         </div>
       </div>
 
