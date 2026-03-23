@@ -14,7 +14,7 @@ function parsePath(path: string): { lang: Language | null; strategy: string | nu
   if (parts[0] === "kz" || parts[0] === "ru") {
     return { lang: parts[0] as Language, strategy: parts[1] ?? null };
   }
-  if (parts[0] === "algo-momentum" || parts[0] === "algo-trend") {
+  if (parts[0] === "basket-50" || parts[0] === "basket-70-tf" || parts[0] === "algo-momentum" || parts[0] === "algo-trend") {
     return { lang: null, strategy: parts[0] };
   }
   return { lang: null, strategy: null };
@@ -36,7 +36,7 @@ function Router() {
 
     if (!pathLang) {
       const targetLang = pathLang ?? "ru";
-      const targetStrategy = strategy ?? "algo-momentum";
+      const targetStrategy = strategy ?? "basket-50";
       setLocation(`/${targetLang}/${targetStrategy}`);
     }
   }, [location]);
