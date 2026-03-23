@@ -1277,6 +1277,13 @@ function LegalDisclaimerModal() {
 const STRATEGY_SLUG_MAP: Record<string, StrategyKey> = {
   basket50: "basket50",
   basket70tf: "basket70tf",
+  "algo-momentum": "basket50",
+  "algo-trend": "basket70tf",
+};
+
+const STRATEGY_URL_MAP: Record<StrategyKey, string> = {
+  basket50: "algo-momentum",
+  basket70tf: "algo-trend",
 };
 
 function getStrategyFromPath(): StrategyKey {
@@ -1293,7 +1300,7 @@ export default function Home() {
 
   const setStrategy = useCallback((key: StrategyKey) => {
     setStrategyState(key);
-    setLocation(`/${key}`);
+    setLocation(`/${STRATEGY_URL_MAP[key]}`);
   }, [setLocation]);
   const sc = STRATEGIES[strategy];
 
