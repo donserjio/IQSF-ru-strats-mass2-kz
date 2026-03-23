@@ -9,17 +9,11 @@ import NotFound from "@/pages/not-found";
 import { LanguageProvider, useTranslation, Language } from "@/i18n";
 import { useEffect } from "react";
 
-// Parse language and strategy from path
-// /kz/algo-momentum → { lang: "kz", strategy: "algo-momentum" }
-// /ru/algo-trend    → { lang: "ru", strategy: "algo-trend" }
-// /algo-momentum    → { lang: null, strategy: "algo-momentum" } (default to kz)
-// /                 → { lang: null, strategy: null }
 function parsePath(path: string): { lang: Language | null; strategy: string | null } {
   const parts = path.replace(/^\//, "").split("/").filter(Boolean);
   if (parts[0] === "kz" || parts[0] === "ru") {
     return { lang: parts[0] as Language, strategy: parts[1] ?? null };
   }
-  // legacy: /algo-momentum
   if (parts[0] === "algo-momentum" || parts[0] === "algo-trend") {
     return { lang: null, strategy: parts[0] };
   }
@@ -30,25 +24,16 @@ function Router() {
   const { lang, setLang } = useTranslation();
   const [location, setLocation] = useLocation();
 
+  // Sync lang from URL + redirect legacy URLs
   useEffect(() => {
     const { lang: pathLang, strategy } = parsePath(location);
 
-  // Dynamic page title based on language
-  useEffect(() => {
-    document.title = lang === "kz"
-      ? "Алгоритмдік сауда стратегиясы | IQSF"
-      : "Алгоритмическая торговая стратегия | IQSF";
-  }, [lang]);
-
-    // Sync lang from URL
     if (pathLang && pathLang !== lang) {
       setLang(pathLang);
-    } else if (!pathLang && lang !== "kz") {
-      // Default to kz
+    } else if (!pathLang && lang !== "ru") {
       setLang("ru");
     }
 
-    // Redirect legacy or root URLs to canonical form
     if (!pathLang) {
       const targetLang = pathLang ?? "ru";
       const targetStrategy = strategy ?? "algo-momentum";
@@ -56,14 +41,14 @@ function Router() {
     }
   }, [location]);
 
-  const { lang: pathLang, strategy } = parsePath(location);
-
-  // Dynamic page title based on language
+  // Dynamic page title
   useEffect(() => {
     document.title = lang === "kz"
       ? "Алгоритмдік сауда стратегиясы | IQSF"
       : "Алгоритмическая торговая стратегия | IQSF";
   }, [lang]);
+
+  const { lang: pathLang } = parsePath(location);
   const activeLang = pathLang ?? lang;
   const HomePage = activeLang === "kz" ? HomeKz : Home;
 
