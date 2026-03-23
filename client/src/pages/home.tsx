@@ -76,8 +76,8 @@ const STRATEGIES: Record<string, StrategyConfig> = {
     pairs: ["BTC/USDT", "ETH/USDT"],
     approachShort: "Мультисистемный количественный подход",
     approachFull: "комбинация нескольких количественных моделей",
-    desc: "Портфель из 15 независимых алгоритмических стратегий на 2 самых ликвидных криптовалютных парах — BTC и ETH. Каждая модель использует собственную логику входа и выхода — от краткосрочного моментума до возврата к среднему. Комбинация подходов сглаживает кривую доходности и снижает зависимость от одного рыночного режима.",
-    archDesc: "Система объединяет 15 независимых алгоритмов на BTC и ETH. Торговля ведётся как в лонг, так и в шорт. Диверсификация по стратегиям обеспечивает стабильность в любых рыночных условиях — от трендов до боковиков.",
+    desc: "Портфель из 15 независимых алгоритмических стратегий на 2 самых ликвидных криптовалютных парах — BTC и ETH. Каждая модель использует собственную логику входа и выхода. Комбинация подходов сглаживает кривую доходности.",
+    archDesc: "Система объединяет 15 независимых алгоритмов на BTC и ETH. Торговля ведётся как в лонг, так и в шорт. Диверсификация по стратегиям обеспечивает стабильность в любых рыночных условиях.",
     riskDesc: "Каждая позиция открывается с фиксированным риском. Стоп-лоссы и тейк-профиты рассчитываются алгоритмом на основе текущей волатильности. В периоды аномальных движений система автоматически снижает экспозицию.",
     execDesc: "Полностью автоматизированное исполнение 24/7. Алгоритм выбирает тип ордера в зависимости от ликвидности и спреда. Работа без участия человека исключает эмоциональный фактор.",
     strategyType: "Количественный, системный",
@@ -92,7 +92,7 @@ const STRATEGIES: Record<string, StrategyConfig> = {
     approachShort: "Трендследящий подход с моментум-фильтрами",
     approachFull: "трендследящая торговля с использованием эффекта моментума",
     desc: "Портфель из 15 трендовых алгоритмов на BTC и ETH, ориентированных на направленные движения рынка. Стратегии удерживают позиции дольше для захвата крупных ценовых импульсов. Встроенные фильтры волатильности отсеивают ложные сигналы.",
-    archDesc: "15 преимущественно трендовых моделей на BTC и ETH с увеличенным периодом удержания. Комбинация моментума и кластеризации волатильности позволяет захватывать сильные направленные движения и оставаться вне рынка в боковиках.",
+    archDesc: "15 преимущественно трендовых моделей на BTC и ETH с увеличенным периодом удержания. Комбинация моментума и кластеризации волатильности позволяет захватывать сильные направленные движения.",
     riskDesc: "Фиксированный риск на каждую сделку без усреднения убытков. Позиции закрываются по стоп-лоссу или трейлинг-стопу, адаптированному к текущей волатильности.",
     execDesc: "Входы и выходы исполняются через рыночные или лимитные ордера в зависимости от глубины стакана и текущего спреда.",
     strategyType: "Трендовый, моментумный, системный",
@@ -264,7 +264,13 @@ function ParticleCanvas() {
   );
 }
 
-const NAV_ITEMS = [
+const NAV_ITEMS_RU = [
+  { label: "Результаты", href: "#results" },
+  { label: "Показатели", href: "#metrics" },
+  { label: "Как это работает", href: "#how-it-works" },
+  { label: "FAQ", href: "#faq" },
+];
+const NAV_ITEMS_KZ = [
   { label: "Результаты", href: "#results" },
   { label: "Показатели", href: "#metrics" },
   { label: "Как это работает", href: "#how-it-works" },
@@ -279,6 +285,8 @@ const STRATEGY_OPTIONS: { key: StrategyKey; label: string }[] = [
 function Navbar({ strategy, onStrategyChange }: { strategy: StrategyKey; onStrategyChange: (k: StrategyKey) => void }) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const { lang } = useTranslation();
+  const NAV_ITEMS = lang === "kz" ? NAV_ITEMS_KZ : NAV_ITEMS_RU;
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 40);
@@ -295,13 +303,13 @@ function Navbar({ strategy, onStrategyChange }: { strategy: StrategyKey; onStrat
   return (
     <nav
       data-testid="navbar"
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-hidden ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
           ? "bg-background/80 backdrop-blur-xl border-b border-border/50"
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center gap-4 h-16">
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
@@ -330,7 +338,7 @@ function Navbar({ strategy, onStrategyChange }: { strategy: StrategyKey; onStrat
             <div className="w-px h-4 bg-border/50 mx-2" />
           </div>
 
-          <div className="hidden md:flex items-center gap-1 ml-auto min-w-0 overflow-hidden">
+          <div className="hidden md:flex items-center gap-1 ml-auto">
             {NAV_ITEMS.map((item) => (
               <button
                 key={item.href}
@@ -366,9 +374,9 @@ function Navbar({ strategy, onStrategyChange }: { strategy: StrategyKey; onStrat
             <LanguageSwitcher />
             <button
               className="p-2 text-foreground"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            data-testid="button-mobile-menu"
-          >
+              onClick={() => setMobileOpen(!mobileOpen)}
+              data-testid="button-mobile-menu"
+            >
             <div className="w-5 flex flex-col gap-1">
               <span className={`h-0.5 bg-foreground transition-all duration-200 ${mobileOpen ? "rotate-45 translate-y-1.5" : ""}`} />
               <span className={`h-0.5 bg-foreground transition-all duration-200 ${mobileOpen ? "opacity-0" : ""}`} />
@@ -498,6 +506,7 @@ function HeroEquityChart({ stats }: { stats?: StatsData }) {
 }
 
 function HeroSection({ stats, sc }: { stats?: StatsData; sc: StrategyConfig }) {
+  const { lang, t } = useTranslation();
   return (
     <section className="relative min-h-[calc(100vh-4rem)] flex items-center overflow-hidden -mt-16 pt-16" data-testid="section-hero">
       <ParticleCanvas />
@@ -534,7 +543,7 @@ function HeroSection({ stats, sc }: { stats?: StatsData; sc: StrategyConfig }) {
               <div className="flex flex-nowrap gap-3 w-full sm:w-auto">
                 <Button
                   size="lg"
-                  className="flex-1 sm:flex-none bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold px-8 py-6 text-base rounded-xl cta-pulse transition-all"
+                  className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold flex-1 sm:flex-none px-8 py-6 text-base rounded-xl cta-pulse transition-all"
                   onClick={() => window.open("https://t.me/Maga_okx", "_blank")}
                 >
                   Подключиться
@@ -542,7 +551,7 @@ function HeroSection({ stats, sc }: { stats?: StatsData; sc: StrategyConfig }) {
                 <Button
                   size="lg"
                   variant="outline"
-                  className="flex-1 sm:flex-none border-border/50 text-foreground bg-transparent px-8 py-6 text-base"
+                  className="border-border/50 text-foreground bg-transparent flex-1 sm:flex-none px-8 py-6 text-base"
                   onClick={() => document.querySelector("#equity")?.scrollIntoView({ behavior: "smooth" })}
                 >
                   Результаты <ArrowRight className="w-4 h-4 ml-2" />
@@ -620,17 +629,18 @@ function ExchangesBar() {
 }
 
 function SocialProofBar() {
+  const { t } = useTranslation();
   return (
     <section className="-mt-1 py-10 px-4 sm:px-6 bg-gradient-to-r from-cyan-500/10 via-blue-500/8 to-cyan-500/10 border-y border-cyan-500/15">
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8 max-w-2xl mx-auto">
           {[
             "Работаем с 2018 года",
-            "Прозрачная онлайн-статистика",
+            "Открытая онлайн-статистика",
             "Тысячи подключённых аккаунтов",
             "Крупнейшие криптобиржи",
-            "Без передачи средств",
-            "Автоматическая торговля 24/7",
+            "Без перевода средств",
+            t("24/7 автоматты сауда"),
           ].map((text) => (
             <div key={text} className="flex items-center gap-3 text-sm sm:text-base text-white font-semibold pl-4 sm:pl-6">
               <CheckCircle className="w-5 h-5 text-cyan-400 shrink-0" />
@@ -645,9 +655,9 @@ function SocialProofBar() {
 
 function localizeDate(s: string): string {
   const months: Record<string, string> = {
-    January: "Январь", February: "Февраль", March: "Март", April: "Апрель",
-    May: "Май", June: "Июнь", July: "Июль", August: "Август",
-    September: "Сентябрь", October: "Октябрь", November: "Ноябрь", December: "Декабрь",
+    January: "январе", February: "феврале", March: "марте", April: "апреле",
+    May: "мае", June: "июне", July: "июле", August: "августе",
+    September: "сентябре", October: "октябре", November: "ноябре", December: "декабре",
   };
   return s.replace(/(\w+)\s+(\d+),\s+(\d+)/g, (_m, mon, day, year) => `${day} ${months[mon] ?? mon} ${year}`);
 }
@@ -684,10 +694,10 @@ function MetricsSection({ stats, isLoading, strategyKey }: { stats?: StatsData; 
         <AnimatedSection>
           <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
-              Key Metrics
+              Ключевые показатели
             </h2>
             <p className="text-muted-foreground text-sm max-w-lg mx-auto">
-              {stats?.dateRange ? `Период: ${localizeDate(stats.dateRange)}` : "Loading data..."}
+              {stats?.dateRange ? `Период: ${localizeDate(stats.dateRange)}` : "Данные загружаются..."}
             </p>
             <LiveDataBadge text="Реальный торговый счёт" />
           </div>
@@ -732,7 +742,7 @@ function ChartPeriodFilter({
 
   const rangeLabel = useMemo(() => {
     if (!range?.from) return "";
-    const fmt = (d: Date) => d.toLocaleDateString("ru-RU", { month: "short", day: "numeric", year: "numeric" });
+    const fmt = (d: Date) => d.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
     if (range.to) return fmt(range.from) + " — " + fmt(range.to);
     return "From " + fmt(range.from);
   }, [range]);
@@ -873,7 +883,6 @@ function ChartLiveBadge({ text }: { text: string }) {
   );
 }
 
-
 function ZoomableChart({
   data,
   color,
@@ -885,7 +894,7 @@ function ZoomableChart({
   rebaseOnZoom = false,
   yearlyTicks = false,
   yMin,
-  locale = "ru-RU",
+  locale = "en-US",
   liveBadgeText,
 }: {
   data: { date: string; value: number }[];
@@ -945,7 +954,7 @@ function ZoomableChart({
       {isZoomed && (
         <div className="flex justify-end mb-2">
           <Button variant="outline" size="sm" className="text-xs border-border/50" onClick={handleReset}>
-            Сбросить
+            Reset Zoom
           </Button>
         </div>
       )}
@@ -1031,13 +1040,14 @@ function ZoomableChart({
         </ResponsiveContainer>
       </div>
       {!isZoomed && (
-        <p className="text-[10px] text-muted-foreground/40 text-center mt-2">Выделите область на графике для увеличения</p>
+        <p className="text-[10px] text-muted-foreground/40 text-center mt-2">Click and drag on chart to zoom in</p>
       )}
     </div>
   );
 }
 
 function EquityChartSection({ stats, isLoading, strategyKey }: { stats?: StatsData; isLoading: boolean; strategyKey: StrategyKey }) {
+  const { t } = useTranslation();
   const equityRaw = stats?.equity ?? [];
   const [filteredData, setFilteredData] = useState(equityRaw);
 
@@ -1056,7 +1066,7 @@ function EquityChartSection({ stats, isLoading, strategyKey }: { stats?: StatsDa
             <p className="text-muted-foreground text-sm max-w-lg mx-auto">
               Рост капитала и эквити стратегии
             </p>
-            <LiveDataBadge text="Обновляется ежедневно · API Binance" />
+            <LiveDataBadge text="Обновляется ежедневно · Binance API" />
           </div>
         </AnimatedSection>
 
@@ -1071,7 +1081,7 @@ function EquityChartSection({ stats, isLoading, strategyKey }: { stats?: StatsDa
             {isLoading ? (
               <Skeleton className="h-[300px] w-full" />
             ) : filteredData.length === 0 ? (
-              <div className="h-[300px] flex items-center justify-center text-muted-foreground text-sm">Нет данных</div>
+              <div className="h-[300px] flex items-center justify-center text-muted-foreground text-sm">Деректер жоқ</div>
             ) : (
               <ZoomableChart
                 data={filteredData}
@@ -1095,6 +1105,7 @@ function EquityChartSection({ stats, isLoading, strategyKey }: { stats?: StatsDa
 }
 
 function ResultsSection({ stats, isLoading }: { stats?: StatsData; isLoading: boolean }) {
+  const { t } = useTranslation();
   const m = stats?.metrics;
   const eoyReturns = stats?.eoyReturns ?? [];
 
@@ -1120,7 +1131,7 @@ function ResultsSection({ stats, isLoading }: { stats?: StatsData; isLoading: bo
             <p className="text-muted-foreground text-sm max-w-lg mx-auto">
               Годовая доходность и ключевые показатели
             </p>
-            <LiveDataBadge text="На основе верифицированных реальных результатов по API" />
+            <LiveDataBadge text={"На основе верифицированных реальных результатов по API"} />
           </div>
         </AnimatedSection>
 
@@ -1128,15 +1139,15 @@ function ResultsSection({ stats, isLoading }: { stats?: StatsData; isLoading: bo
           <AnimatedSection delay={100}>
             <Card className="overflow-hidden bg-card/50 backdrop-blur-sm border-border/50">
               <div className="p-4 border-b border-border/30">
-                <h3 className="text-sm font-semibold text-foreground">Годовой доходs</h3>
+                <h3 className="text-sm font-semibold text-foreground">Жылдық табыстылық</h3>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-border/50">
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground">Year</th>
-                      <th className="text-center px-4 py-3 text-xs font-semibold text-muted-foreground">Return</th>
-                      <th className="text-right px-4 py-3 text-xs font-semibold text-cyan-400">Cumulative</th>
+                      <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground">Жыл</th>
+                      <th className="text-center px-4 py-3 text-xs font-semibold text-muted-foreground">Табыстылық</th>
+                      <th className="text-right px-4 py-3 text-xs font-semibold text-cyan-400">Жинақталған</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -1158,7 +1169,7 @@ function ResultsSection({ stats, isLoading }: { stats?: StatsData; isLoading: bo
           <AnimatedSection delay={200}>
             <Card className="overflow-hidden bg-card/50 backdrop-blur-sm border-border/50">
               <div className="p-4 border-b border-border/30">
-                <h3 className="text-sm font-semibold text-foreground">Performance Statistics</h3>
+                <h3 className="text-sm font-semibold text-foreground">Результаты статистикасы</h3>
               </div>
               <div className="p-4 space-y-0">
                 {resultStats.map((item) => (
@@ -1176,28 +1187,27 @@ function ResultsSection({ stats, isLoading }: { stats?: StatsData; isLoading: bo
   );
 }
 
-const ACCESS_TERMS_BASE = [
-  { label: "Минимальная аллокация", value: "$500" },
-  { label: "Комиссия за управление", value: "0%" },
-  { label: "Комиссия за результат", value: "30%" },
-  { label: "Принцип «высшей отметки»", value: "Применяется" },
-  { label: "Lock-up Период", value: "Отсутствует" },
-  { label: "Распределение комиссий", value: "Раз в квартал" },
-  { label: "Формат подключения", value: "API-ключ через биржу" },
-  { label: "Торговые активы", value: "10 торговых пар, 5 подходов" },
-  { label: "Обеспечение", value: "USDT" },
-  { label: "Биржи", value: "Binance, OKX, Bybit, Bitget, BingX" },
-];
-
 function AccessTermsSection({ sc }: { sc: StrategyConfig }) {
-  const terms = ACCESS_TERMS_BASE;
+  const { t } = useTranslation();
+  const terms = [
+    { label: "Минимальная сумма", value: "$500" },
+    { label: t("Комиссия за управление"), value: "0%" },
+    { label: "Комиссия за результат", value: "30%" },
+    { label: "High-water mark", value: "Применяется" },
+    { label: "Lock-up период", value: "Отсутствует" },
+    { label: "Распределение комиссий", value: "Раз в квартал" },
+    { label: "Формат подключения", value: "API-ключ через биржу" },
+    { label: "Торговые активы", value: "10 торговых пар, 5 подходов" },
+    { label: "Обеспечение", value: "USDT" },
+    { label: t("Биржи"), value: "Binance, OKX, Bybit, Bitget, BingX" },
+  ];
   return (
     <section id="terms" className="py-12 px-4 sm:px-6 relative bg-card/30 border-y border-border/10" data-testid="section-terms">
       <div className="max-w-5xl mx-auto">
         <AnimatedSection>
           <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
-              Условия подключения
+              Подключиться шарттары
             </h2>
             <p className="text-muted-foreground text-sm max-w-lg mx-auto">
               Автоматический алготрейдинг — просто и безопасно
@@ -1224,19 +1234,19 @@ function ExchangeLogos({ strategyKey }: { strategyKey: string }) {
   return null;
 }
 
-function buildFaqItems(sc: StrategyConfig) {
+function buildFaqItems(sc: StrategyConfig, t: (k: string) => string) {
   return [
     {
-      q: "Как работает сервис?",
-      a: `Управляющая компания подключается к субаккаунту клиента на бирже через API и управляет торговлей по стратегии ${sc.label}. Системный портфель на основе ${sc.approachFull} работает непрерывно и полностью автоматически — без дискреционного вмешательства. Ваш капитал всегда остаётся на вашем биржевом счёте.`,
+      q: t("Как работает сервис?"),
+      a: `Управляющая компания подключается к субаккаунту клиента на бирже через API и управляет торговлей по стратегии ${sc.label}. Системный портфель на основе ${sc.approachFull} работает непрерывно и полностью автоматически. Ваш капитал всегда на вашем биржевом счёте.`,
     },
     {
-      q: "Где хранятся мои средства?",
-      a: "Ваш капитал остаётся на вашем субаккаунте биржи (OKX, Binance или любой другой). Управляющая компания получает только торговый API-доступ — без прав на вывод или перевод средств. Вы сохраняете полный контроль над своими деньгами.",
+      q: t("Где хранятся мои средства?"),
+      a: "Ваш капитал остаётся на субаккаунте биржи (OKX, Binance или другой). УК получает только торговый API-доступ — без прав на вывод. Полный контроль за вами.",
     },
     {
       q: "Как начать?",
-      a: "Свяжитесь с нами через Telegram для начала подключения. Мы поможем создать API-ключ (без прав на вывод, только торговля) и подключить ваш аккаунт. Процесс занимает менее 10 минут.",
+      a: "Свяжитесь с нами через Telegram. Поможем создать API-ключ (только торговля) и подключить аккаунт за 10 минут.",
     },
     {
       q: "Какая минимальная сумма подключения?",
@@ -1244,29 +1254,30 @@ function buildFaqItems(sc: StrategyConfig) {
     },
     {
       q: "Какие комиссии?",
-      a: "Комиссия за управление — 0%, плюс 30% от прибыли с high-water mark. Комиссии рассчитываются и распределяются ежеквартально. Без периода блокировки.",
+      a: "Комиссия за управление — 0%, плюс 30% от прибыли с high-water mark. Ежеквартально. Без lock-up.",
     },
     {
       q: "Какие биржи поддерживаются?",
       a: "Binance, OKX, Bybit, Bitget, BingX. Подключение через API-ключ биржи.",
     },
     {
-      q: "Какими активами торгует стратегия?",
-      a: "Стратегии торгуют бессрочными фьючерсами на BTC и ETH.",
+      q: t("Какими активами торгует стратегия?"),
+      a: t("Стратегии торгуют бессрочными фьючерсами на BTC и ETH."),
     },
     {
-      q: "Какие меры управления рисками применяются?",
-      a: `Каждая сделка открывается с фиксированным риском. Стоп-лоссы и тейк-профиты калибруются автоматически на основе текущей волатильности. В периоды аномальной волатильности система снижает активность. Автоматический мониторинг 24/7.`,
+      q: "Какие меры управления рисками?",
+      a: `Каждая сделка с фиксированным риском. Стоп-лоссы и тейк-профиты калибруются по волатильности. В аномальные периоды система снижает активность. Мониторинг 24/7.`,
     },
     {
-      q: "Данные о результатах — это бэктест или реальная торговля?",
-      a: "Данные, представленные на сайте, основаны на результатах реальной алгоритмической торговли. Прошлые результаты не гарантируют будущих.",
+      q: "Данные — бэктест или реальная торговля?",
+      a: "Данные основаны на результатах реальной торговли. Прошлые результаты не гарантируют будущих.",
     },
   ];
 }
 
 function FAQSection({ sc }: { sc: StrategyConfig }) {
-  const FAQ_ITEMS = buildFaqItems(sc);
+  const { t } = useTranslation();
+  const FAQ_ITEMS = buildFaqItems(sc, t);
   return (
     <section id="faq" className="py-12 px-4 sm:px-6 relative bg-card/30 border-y border-border/10" data-testid="section-faq">
       <div className="max-w-3xl mx-auto">
@@ -1310,7 +1321,7 @@ function Footer() {
       <div className="px-4 sm:px-6 pb-10">
         <div className="max-w-7xl mx-auto pt-8">
           <p className="text-xs text-muted-foreground/60 leading-relaxed max-w-5xl mx-auto text-center">
-            <strong>Дисклеймер:</strong> Алгоритмическая торговля цифровыми активами связана со значительными рисками и предназначена только для квалифицированных клиентов. Цифровые активы обладают высокой волатильностью и спекулятивным характером. Стратегии могут испытывать существенные просадки в неблагоприятных рыночных условиях. Рынки криптовалют подвержены меняющемуся и неопределённому регулированию. Существует контрагентский риск биржи, включая возможность её банкротства или взлома. Прошлые результаты не гарантируют будущих. Клиенты должны располагать достаточным капиталом для покрытия потери значительной части или всех вложенных средств. Данный сервис не подходит для клиентов, которые не могут позволить себе существенные потери капитала или нуждаются в ликвидности в краткосрочной перспективе.
+            <p>Алгоритмическая торговля сопряжена со значительными рисками, включая возможную потерю всего капитала. Подходит только клиентам, готовым к потере всей суммы вложений.</p>
           </p>
           <div className="mt-4 text-xs text-muted-foreground/40 text-center">
             &copy; {new Date().getFullYear()} Управляющая компания. Все права защищены.
@@ -1334,40 +1345,40 @@ function LegalDisclaimerModal() {
         </div>
         <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4 text-sm text-muted-foreground leading-relaxed custom-scrollbar">
           <div>
-            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Только информационные цели</h3>
-            <p>Данный веб-сайт предоставляется исключительно в информационных целях и не является офертой, приглашением к оферте или какой-либо формой инвестиционного совета. Доступ к сервису предоставляется только квалифицированным клиентам, соответствующим критериям допуска и заключившим договор с управляющей компанией.</p>
+            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Только информационные цели үшін</h3>
+            <p>Данный сайт предоставляется исключительно в информационных целях и не является офертой или инвестиционным советом. Доступ предоставляется только квалифицированным клиентам.</p>
           </div>
           <div>
             <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Не является инвестиционным советом</h3>
-            <p>Ничто на данном сайте не является инвестиционным, юридическим, налоговым или иным советом. Потенциальным клиентам следует проконсультироваться с собственными профессиональными консультантами относительно пригодности данного сервиса для их обстоятельств.</p>
+            <p>Ничто на данном сайте не является инвестиционным, юридическим, налоговым или иным советом.</p>
           </div>
           <div>
             <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Риск потерь</h3>
-            <p>Алгоритмическая торговля цифровыми активами сопряжена со значительными рисками, включая возможную потерю всего или существенной части инвестированного капитала. Цифровые активы обладают высокой волатильностью и спекулятивным характером. Данный сервис подходит только клиентам, которые могут позволить себе потерю всей суммы вложений.</p>
+            <p>Алгоритмическая торговля сопряжена со значительными рисками, включая возможную потерю всего капитала. Подходит только клиентам, готовым к потере всей суммы вложений.</p>
           </div>
           <div>
             <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Прошлые результаты</h3>
-            <p>Прошлые результаты не являются показателем будущих. Данные, представленные на сайте, отражают результаты реальной алгоритмической торговли. Исторические результаты не гарантируют будущей доходности и не отражают влияние всех возможных рыночных сценариев на эффективность стратегии.</p>
+            <p>Прошлые результаты не являются показателем будущих. Данные основаны на реальной алгоритмической торговле.</p>
           </div>
           <div>
-            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Отсутствие гарантий</h3>
-            <p>Нет гарантии, что стратегии достигнут поставленных целей. Целевые доходности и метрики риска — это ориентиры, а не гарантии. В неблагоприятных рыночных условиях возможны существенные просадки.</p>
+            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Кепілдіктер жоқ</h3>
+            <p>Нет гарантии достижения целей. Целевые доходности — ориентиры, а не гарантии.</p>
           </div>
           <div>
             <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Биржевые и контрагентские риски</h3>
-            <p>Средства клиента остаются на его собственном субаккаунте на бирже. Управляющая компания имеет только API-доступ для торговли без права на вывод средств. Контрагентский риск биржи, включая возможность банкротства или взлома, оценивается клиентом самостоятельно.</p>
+            <p>Средства клиента остаются на его субаккаунте. УК имеет только торговый API-доступ. Контрагентский риск биржи оценивается клиентом.</p>
           </div>
           <div>
             <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Прогнозные заявления</h3>
-            <p>Данный сайт может содержать прогнозные заявления. Такие заявления подвержены рискам и неопределённостям, которые могут привести к существенному отличию фактических результатов. Управляющая компания не берёт на себя обязательств по обновлению прогнозных заявлений.</p>
+            <p>Сайт может содержать прогнозные заявления, подверженные рискам и неопределённостям.</p>
           </div>
           <div>
-            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Доступ по инициативе клиента</h3>
-            <p>Содержимое данного сайта доступно только лицам, обратившимся к нему по собственной инициативе, без какого-либо прямого или косвенного привлечения со стороны управляющей компании. Если вы попали на данный сайт не по собственной инициативе, вам следует немедленно покинуть его.</p>
+            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Клиент бастамасымен қолжетімділік</h3>
+            <p>Содержимое сайта доступно только лицам, обратившимся по собственной инициативе.</p>
           </div>
           <div>
             <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Ограниченные юрисдикции</h3>
-            <p>Информация на данном сайте не предназначена для распространения среди лиц или организаций в юрисдикциях, где такое распространение или использование противоречит местному законодательству или нормативным требованиям.</p>
+            <p>Информация не предназначена для юрисдикций, где это противоречит законодательству.</p>
           </div>
         </div>
         <div className="px-6 py-4 border-t border-border/30 flex flex-col sm:flex-row gap-3 sm:justify-end">
@@ -1401,15 +1412,20 @@ const STRATEGY_URL_MAP: Record<StrategyKey, string> = {
 };
 
 function getStrategyFromPath(): StrategyKey {
-  const path = window.location.pathname.replace(/^\//, "").toLowerCase();
-  if (path && !STRATEGY_SLUG_MAP[path]) {
-    // Redirect unknown slugs to default
-    window.history.replaceState(null, "", "/");
+  const rawParts = window.location.pathname.replace(/^\//, "").toLowerCase().split("/").filter(Boolean);
+  let slug = rawParts[0];
+  if (rawParts[0] === "kz" || rawParts[0] === "ru") {
+    slug = rawParts[1] ?? "";
   }
-  return STRATEGY_SLUG_MAP[path] || "basket50";
+  if (slug && !STRATEGY_SLUG_MAP[slug]) {
+    const langPrefix = rawParts[0] === "kz" ? "kz" : "ru";
+    window.history.replaceState(null, "", "/" + langPrefix + "/basket-50");
+  }
+  return STRATEGY_SLUG_MAP[slug] || "basket50";
 }
 
 export default function Home() {
+  const { lang, t } = useTranslation();
   const [, setLocation] = useLocation();
   const [strategy, setStrategyState] = useState<StrategyKey>(getStrategyFromPath);
   const [stats, setStats] = useState<StatsData | null>(null);
@@ -1417,7 +1433,9 @@ export default function Home() {
 
   const setStrategy = useCallback((key: StrategyKey) => {
     setStrategyState(key);
-    setLocation(`/${STRATEGY_URL_MAP[key]}`);
+    const rawParts = window.location.pathname.replace(/^\//, "").split("/").filter(Boolean);
+    const langPrefix = rawParts[0] === "kz" ? "kz" : "ru";
+    setLocation("/" + langPrefix + "/" + STRATEGY_URL_MAP[key]);
   }, [setLocation]);
   const sc = STRATEGIES[strategy];
 
@@ -1455,9 +1473,9 @@ export default function Home() {
         <div className="max-w-5xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-10">
-              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">Strategy Architecture</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">Стратегия қалай құрылған</h2>
               <p className="text-muted-foreground text-sm max-w-2xl mx-auto">
-                15 trading systems on the 2 most liquid pairs — BTC and ETH. Fully automated execution with built-in risk management.
+                15 торговых систем на 2 самых ликвидных парах — BTC и ETH. Полностью автоматизированное исполнение со встроенным контролем рисков.
               </p>
             </div>
           </AnimatedSection>
@@ -1466,7 +1484,7 @@ export default function Home() {
               {
                 num: "01",
                 title: "Диверсификация",
-                desc: "15 independent trading systems reduce dependence on a single market regime. Trading on BTC and ETH — both long and short.",
+                desc: "15 независимых торговых систем снижают зависимость от одного рыночного режима. Торговля BTC и ETH — лонг и шорт.",
                 accent: "from-cyan-500/30 to-cyan-600/10",
               },
               {
@@ -1477,14 +1495,14 @@ export default function Home() {
               },
               {
                 num: "03",
-                title: "Автоматизация",
+                title: "Автоматтандыру",
                 desc: "Алгоритм исполняет сделки 24/7 без участия человека. Решения основаны на математических моделях.",
                 accent: "from-violet-500/30 to-violet-600/10",
               },
               {
                 num: "04",
                 title: "Адаптивность",
-                desc: "15 strategies use momentum, mean-reversion, and volatility clustering — approaches that work across different market phases.",
+                desc: "15 стратегий используют моментум, возврат к среднему и кластеризацию волатильности — подходы для разных фаз рынка.",
                 accent: "from-emerald-500/30 to-emerald-600/10",
               },
             ].map((item, i) => (
@@ -1509,15 +1527,15 @@ export default function Home() {
         <div className="max-w-5xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-10">
-              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">How It Works</h2>
-              <p className="text-muted-foreground text-sm max-w-lg mx-auto">Algo trading via exchange API — simple and fast</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">Как это работает</h2>
+              <p className="text-muted-foreground text-sm max-w-lg mx-auto">Биржаның API арқылы алготрейдинг — қарапайым және жылдам</p>
             </div>
           </AnimatedSection>
           <div className="flex flex-col sm:grid sm:grid-cols-3 gap-3 sm:gap-6">
             {[
-              { step: "01", title: "Откройте счёт на бирже", desc: "Binance, OKX, Bybit, Bitget, BingX. Minimum — $500." },
+              { step: "01", title: "Откройте счёт на бирже", desc: "Binance, OKX, Bybit, Bitget, BingX. Минимум — $500." },
               { step: "02", title: "Свяжитесь с нами", desc: "Telegram / WhatsApp. Подключение через API-ключ за 10 минут." },
-              { step: "03", title: "Алгоритм работает за вас", desc: "24/7 automated trading. 30% performance fee. No lock-up." },
+              { step: "03", title: "Алгоритм работает за вас", desc: "24/7 автоматическая торговля. 30% от прибыли. Без lock-up." },
             ].map((item) => (
               <AnimatedSection key={item.step} delay={parseInt(item.step) * 100}>
                 <div className="flex sm:flex-col items-center sm:text-center gap-4 sm:gap-0 p-4 sm:p-6 rounded-xl border border-border/30 bg-card/40 backdrop-blur-sm h-full">
@@ -1539,14 +1557,14 @@ export default function Home() {
         <div className="max-w-5xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-10">
-              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">Почему алгоритмическая торговля через API</h2>
-              <p className="text-muted-foreground text-sm max-w-lg mx-auto">Advantages of algorithmic trading</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">Неге API арқылы алготрейдинг</h2>
+              <p className="text-muted-foreground text-sm max-w-lg mx-auto">Алгоритмдік сауданың артықшылықтары</p>
             </div>
           </AnimatedSection>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {[
-              { icon: Shield, title: "Без передачи средств", desc: "Средства всегда остаются на вашем биржевом счёте." },
-              { icon: Wallet, title: "Вывод в любой момент", desc: "Без периода блокировки." },
+              { icon: Shield, title: "Без перевода средств", desc: "Средства всегда на вашем биржевом счёте." },
+              { icon: Wallet, title: "Вывод в любой момент", desc: "Без lock-up." },
               { icon: Eye, title: "Полная прозрачность", desc: "Каждая сделка видна в приложении биржи." },
               { icon: PercentCircle, title: "Честная комиссия", desc: "30% только с прибыли." },
             ].map((item, i) => (
@@ -1567,18 +1585,18 @@ export default function Home() {
 
       <section className="py-12 px-4 sm:px-6 text-center">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">Готовы подключиться?</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">Подключитьсяға дайынсыз ба?</h2>
           <p className="text-muted-foreground text-sm mb-8 max-w-lg mx-auto">
-            Свяжитесь с нашей командой напрямую. Мы расскажем о стратегии, подключении и процессе онбординга.
+            Свяжитесь с нашей командой напрямую. Расскажем о стратегии, подключении и процессе онбординга.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 mb-8 text-sm text-muted-foreground max-w-xs sm:max-w-md mx-auto">
             {[
-              "Лет опыта",
+              "Многолетний опыт",
               "Тысячи аккаунтов",
               "Прозрачная статистика",
-              "10-minute setup",
-              "24/7 Support",
-              "Без передачи средств",
+              "Подключение за 10 минут",
+              "Поддержка 24/7",
+              "Без перевода средств",
             ].map((text) => (
               <div key={text} className="flex items-center gap-2 pl-2">
                 <CheckCircle className="w-4 h-4 text-cyan-400 shrink-0" />
@@ -1593,7 +1611,7 @@ export default function Home() {
               onClick={() => window.open("https://t.me/Maga_okx", "_blank")}
             >
               <Send className="w-4 h-4 mr-2" />
-              Написать нам в Telegram
+              {"Написать в Telegram"}
             </Button>
             <Button
               size="lg"
@@ -1601,7 +1619,7 @@ export default function Home() {
               onClick={() => window.open("https://wa.me/message/NA3LVXXGJPDEJ1", "_blank")}
             >
               <SiWhatsapp className="w-4 h-4 mr-2" />
-              Написать нам в WhatsApp
+              {"Написать в WhatsApp"}
             </Button>
           </div>
         </div>
