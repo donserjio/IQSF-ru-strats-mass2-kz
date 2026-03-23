@@ -1142,15 +1142,15 @@ function ResultsSection({ stats, isLoading }: { stats?: StatsData; isLoading: bo
           <AnimatedSection delay={100}>
             <Card className="overflow-hidden bg-card/50 backdrop-blur-sm border-border/50">
               <div className="p-4 border-b border-border/30">
-                <h3 className="text-sm font-semibold text-foreground">Жылдық табыстылық</h3>
+                <h3 className="text-sm font-semibold text-foreground">Годовая доходность</h3>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-border/50">
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground">Жыл</th>
-                      <th className="text-center px-4 py-3 text-xs font-semibold text-muted-foreground">Табыстылық</th>
-                      <th className="text-right px-4 py-3 text-xs font-semibold text-cyan-400">Жинақталған</th>
+                      <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground">Год</th>
+                      <th className="text-center px-4 py-3 text-xs font-semibold text-muted-foreground">Доходность</th>
+                      <th className="text-right px-4 py-3 text-xs font-semibold text-cyan-400">Накопленная</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -1172,7 +1172,7 @@ function ResultsSection({ stats, isLoading }: { stats?: StatsData; isLoading: bo
           <AnimatedSection delay={200}>
             <Card className="overflow-hidden bg-card/50 backdrop-blur-sm border-border/50">
               <div className="p-4 border-b border-border/30">
-                <h3 className="text-sm font-semibold text-foreground">Результаты статистикасы</h3>
+                <h3 className="text-sm font-semibold text-foreground">Статистика результатов</h3>
               </div>
               <div className="p-4 space-y-0">
                 {resultStats.map((item) => (
@@ -1476,7 +1476,7 @@ export default function Home() {
         <div className="max-w-5xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-10">
-              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">Стратегия қалай құрылған</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">Архитектура стратегии</h2>
               <p className="text-muted-foreground text-sm max-w-2xl mx-auto">
                 15 торговых систем на 2 самых ликвидных парах — BTC и ETH. Полностью автоматизированное исполнение со встроенным контролем рисков.
               </p>
@@ -1498,7 +1498,7 @@ export default function Home() {
               },
               {
                 num: "03",
-                title: "Автоматтандыру",
+                title: "Автоматизация",
                 desc: "Алгоритм исполняет сделки 24/7 без участия человека. Решения основаны на математических моделях.",
                 accent: "from-violet-500/30 to-violet-600/10",
               },
@@ -1531,7 +1531,7 @@ export default function Home() {
           <AnimatedSection>
             <div className="text-center mb-10">
               <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">Как это работает</h2>
-              <p className="text-muted-foreground text-sm max-w-lg mx-auto">Биржаның API арқылы алготрейдинг — қарапайым және жылдам</p>
+              <p className="text-muted-foreground text-sm max-w-lg mx-auto">Алготрейдинг через API биржи — просто и быстро</p>
             </div>
           </AnimatedSection>
           <div className="flex flex-col sm:grid sm:grid-cols-3 gap-3 sm:gap-6">
@@ -1560,8 +1560,8 @@ export default function Home() {
         <div className="max-w-5xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-10">
-              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">Неге API арқылы алготрейдинг</h2>
-              <p className="text-muted-foreground text-sm max-w-lg mx-auto">Алгоритмдік сауданың артықшылықтары</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">Почему алгоритмическая торговля через API</h2>
+              <p className="text-muted-foreground text-sm max-w-lg mx-auto">Преимущества алгоритмической торговли</p>
             </div>
           </AnimatedSection>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
@@ -1588,7 +1588,7 @@ export default function Home() {
 
       <section className="py-12 px-4 sm:px-6 text-center">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">Подключитьсяға дайынсыз ба?</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">Готовы подключиться?</h2>
           <p className="text-muted-foreground text-sm mb-8 max-w-lg mx-auto">
             Свяжитесь с нашей командой напрямую. Расскажем о стратегии, подключении и процессе онбординга.
           </p>
