@@ -518,14 +518,14 @@ function HeroSection({ stats, sc }: { stats?: StatsData; sc: StrategyConfig }) {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan-400"></span>
                 </span>
-                Алгоритмический трейдинг 24/7
+                24/7 алгоритмдік трейдинг
               </div>
             </AnimatedSection>
 
             <AnimatedSection delay={100}>
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-[1.08] tracking-tight">
-                Алгоритм торгует.<br />
-                <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Вы зарабатываете.</span>
+                Алгоритм сауда жасайды.<br />
+                <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">Сіз табыс аласыз.</span>
               </h1>
             </AnimatedSection>
 
@@ -542,7 +542,7 @@ function HeroSection({ stats, sc }: { stats?: StatsData; sc: StrategyConfig }) {
                   className="bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-bold px-12 py-7 text-lg rounded-xl cta-pulse transition-all"
                   onClick={() => window.open("https://t.me/Maga_okx", "_blank")}
                 >
-                  Подключиться
+                  Қосылу
                 </Button>
                 <Button
                   size="lg"
@@ -550,7 +550,7 @@ function HeroSection({ stats, sc }: { stats?: StatsData; sc: StrategyConfig }) {
                   className="border-border/50 text-foreground bg-transparent px-8 py-6 text-base"
                   onClick={() => document.querySelector("#equity")?.scrollIntoView({ behavior: "smooth" })}
                 >
-                  Результаты <ArrowRight className="w-4 h-4 ml-2" />
+                  Нәтижелер <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>
             </AnimatedSection>
@@ -562,7 +562,7 @@ function HeroSection({ stats, sc }: { stats?: StatsData; sc: StrategyConfig }) {
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-sm text-muted-foreground font-medium">{sc.label}</span>
                   <span className="text-lg sm:text-xl font-bold text-cyan-400 font-mono">
-                    Кривая доходности
+                    Табыстылық қисығы
                   </span>
                 </div>
                 <HeroEquityChart stats={stats} />
@@ -602,7 +602,7 @@ function ExchangesBar() {
       <div className="max-w-5xl mx-auto text-center">
         <AnimatedSection>
           <p className="text-lg sm:text-xl text-white font-semibold mb-8 tracking-wide">
-            Работаем с крупнейшими криптобиржами
+            Ең ірі криптобиржалармен жұмыс жасаймыз
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
             {exchanges.map((ex) => (
@@ -690,10 +690,10 @@ function MetricsSection({ stats, isLoading, strategyKey }: { stats?: StatsData; 
         <AnimatedSection>
           <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
-              Ключевые показатели
+              Негізгі көрсеткіштер
             </h2>
             <p className="text-muted-foreground text-sm max-w-lg mx-auto">
-              {stats?.dateRange ? `Период: ${localizeDate(stats.dateRange)}` : "Деректер жүктелуде..."}
+              {stats?.dateRange ? `Кезең: ${localizeDate(stats.dateRange)}` : "Деректер жүктелуде..."}
             </p>
             <LiveDataBadge text="Нақты сауда шоты" />
           </div>
@@ -804,7 +804,7 @@ function ChartPeriodFilter({
         className={`px-3 py-1 rounded-md text-xs font-medium transition-all ${active === "all" ? "bg-cyan-500/20 text-cyan-400 border border-cyan-500/40" : "bg-background/50 border border-border/50 text-muted-foreground hover:text-foreground"}`}
         data-testid="button-filter-all"
       >
-        Всё время
+        Барлық уақыт
       </button>
       {years.map((y) => (
         <button
@@ -823,7 +823,7 @@ function ChartPeriodFilter({
             data-testid="button-filter-calendar"
           >
             <CalendarRange className="w-3 h-3" />
-            Период
+            Кезең
           </button>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-0 bg-card border-border/50" align="start">
@@ -886,10 +886,10 @@ function EquityChartSection({ stats, isLoading, strategyKey }: { stats?: StatsDa
         <AnimatedSection>
           <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
-              Результаты стратегии
+              Нәтижелер стратегии
             </h2>
             <p className="text-muted-foreground text-sm max-w-lg mx-auto">
-              Рост капитала и эквити стратегии
+              Капитал өсімі және стратегия эквитиі
             </p>
             <LiveDataBadge text={t("Күн сайын жаңартылады · Binance API")} />
           </div>
@@ -898,7 +898,7 @@ function EquityChartSection({ stats, isLoading, strategyKey }: { stats?: StatsDa
         <AnimatedSection delay={100}>
           <Card className="bg-card/50 backdrop-blur-sm border-border/50 p-4 sm:p-6">
             <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
-              <h3 className="text-sm font-semibold text-foreground">Кривая доходности</h3>
+              <h3 className="text-sm font-semibold text-foreground">Табыстылық қисығы</h3>
               {equityRaw.length > 0 && (
                 <ChartPeriodFilter allData={equityRaw} onFilter={setFilteredData} rebaseOnFilter additiveRebase />
               )}
@@ -906,7 +906,7 @@ function EquityChartSection({ stats, isLoading, strategyKey }: { stats?: StatsDa
             {isLoading ? (
               <Skeleton className="h-[300px] w-full" />
             ) : filteredData.length === 0 ? (
-              <div className="h-[300px] flex items-center justify-center text-muted-foreground text-sm">Нет данных</div>
+              <div className="h-[300px] flex items-center justify-center text-muted-foreground text-sm">Деректер жоқ</div>
             ) : (
               <div className="h-[300px] sm:h-[400px]">
                 <ResponsiveContainer width="100%" height="100%">
@@ -947,7 +947,7 @@ function EquityChartSection({ stats, isLoading, strategyKey }: { stats?: StatsDa
                           <div className="bg-card border border-border rounded-lg px-4 py-3 shadow-xl min-w-[200px]">
                             <p className="text-sm font-bold text-foreground mb-1">{dateStr}</p>
                             <div className="flex items-center justify-between gap-4">
-                              <span className="text-xs text-muted-foreground">Доходность</span>
+                              <span className="text-xs text-muted-foreground">Табыстылық</span>
                               <span className={`text-sm font-bold font-mono ${val >= 0 ? "text-cyan-400" : "text-red-400"}`}>
                                 {val >= 0 ? "+" : ""}{val.toFixed(2)}%
                               </span>
@@ -999,10 +999,10 @@ function ResultsSection({ stats, isLoading }: { stats?: StatsData; isLoading: bo
         <AnimatedSection>
           <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
-              Результаты
+              Нәтижелер
             </h2>
             <p className="text-muted-foreground text-sm max-w-lg mx-auto">
-              Годовые доходности и ключевая статистика
+              Жылдық табыстылық және негізгі статистика
             </p>
             <LiveDataBadge text={t("API арқылы расталған нақты нәтижелерге негізделген")} />
           </div>
@@ -1012,15 +1012,15 @@ function ResultsSection({ stats, isLoading }: { stats?: StatsData; isLoading: bo
           <AnimatedSection delay={100}>
             <Card className="overflow-hidden bg-card/50 backdrop-blur-sm border-border/50">
               <div className="p-4 border-b border-border/30">
-                <h3 className="text-sm font-semibold text-foreground">Годовые доходности</h3>
+                <h3 className="text-sm font-semibold text-foreground">Жылдық табыстылық</h3>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-border/50">
-                      <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground">Год</th>
-                      <th className="text-center px-4 py-3 text-xs font-semibold text-muted-foreground">Доходность</th>
-                      <th className="text-right px-4 py-3 text-xs font-semibold text-cyan-400">Накопленная</th>
+                      <th className="text-left px-4 py-3 text-xs font-semibold text-muted-foreground">Жыл</th>
+                      <th className="text-center px-4 py-3 text-xs font-semibold text-muted-foreground">Табыстылық</th>
+                      <th className="text-right px-4 py-3 text-xs font-semibold text-cyan-400">Жинақталған</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -1042,7 +1042,7 @@ function ResultsSection({ stats, isLoading }: { stats?: StatsData; isLoading: bo
           <AnimatedSection delay={200}>
             <Card className="overflow-hidden bg-card/50 backdrop-blur-sm border-border/50">
               <div className="p-4 border-b border-border/30">
-                <h3 className="text-sm font-semibold text-foreground">Статистика результатов</h3>
+                <h3 className="text-sm font-semibold text-foreground">Нәтижелер статистикасы</h3>
               </div>
               <div className="p-4 space-y-0">
                 {resultStats.map((item) => (
@@ -1080,10 +1080,10 @@ function AccessTermsSection({ sc }: { sc: StrategyConfig }) {
         <AnimatedSection>
           <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
-              Условия подключения
+              Қосылу шарттары
             </h2>
             <p className="text-muted-foreground text-sm max-w-lg mx-auto">
-              Автоматический алготрейдинг — просто и безопасно
+              Автоматты алготрейдинг — қарапайым және қауіпсіз
             </p>
           </div>
         </AnimatedSection>
@@ -1157,7 +1157,7 @@ function FAQSection({ sc }: { sc: StrategyConfig }) {
         <AnimatedSection>
           <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
-              Часто задаваемые вопросы
+              Жиі қойылатын сұрақтар
             </h2>
           </div>
         </AnimatedSection>
@@ -1194,10 +1194,10 @@ function Footer() {
       <div className="px-4 sm:px-6 pb-10">
         <div className="max-w-7xl mx-auto pt-8">
           <p className="text-xs text-muted-foreground/60 leading-relaxed max-w-5xl mx-auto text-center">
-            <strong>Отказ от ответственности:</strong> Алгоритмическая торговля цифровыми активами сопряжена со значительными рисками и подходит только для квалифицированных клиентов. Цифровые активы высоко волатильны и носят спекулятивный характер. Стратегии могут испытывать существенные просадки в неблагоприятных рыночных условиях. Рынки криптовалют подвержены развивающейся и неопределённой нормативной среде. Существует биржевой риск контрагента, включая возможность отказа биржи или нарушений безопасности. Прошлые результаты не являются показателем будущих результатов. Клиенты должны иметь достаточный баланс, чтобы переносить потерю значительной части или всего вложенного капитала. Данный сервис не подходит для клиентов, которые не могут перенести существенные потери капитала или которым требуется ликвидность в короткие сроки.
+            <strong>Отказ от ответственности:</strong> Алгоритмическая торговля цифровыми активами сопряжена со значительными рисками и подходит только для квалифицированных клиентов. Цифровые активы высоко волатильны и носят спекулятивный характер. Стратегии могут испытывать существенные просадки в неблагоприятных рыночных условиях. Рынки криптовалют подвержены развивающейся и неопределённой нормативной среде. Существует биржевой риск контрагента, включая возможность отказа биржи или нарушений безопасности. Өткен нәтижелер не являются показателем будущих результатов. Клиенты должны иметь достаточный баланс, чтобы переносить потерю значительной части или всего вложенного капитала. Данный сервис не подходит для клиентов, которые не могут перенести существенные потери капитала или которым требуется ликвидность в короткие сроки.
           </p>
           <div className="mt-4 text-xs text-muted-foreground/40 text-center">
-            &copy; {new Date().getFullYear()} Управляющая компания. Все права защищены.
+            &copy; {new Date().getFullYear()} Басқарушы компания. Барлық құқықтар қорғалған.
           </div>
         </div>
       </div>
@@ -1214,44 +1214,44 @@ function LegalDisclaimerModal() {
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
       <div className="w-full max-w-4xl max-h-[85vh] flex flex-col bg-card border border-border/50 rounded-md shadow-2xl">
         <div className="px-6 pt-6 pb-4 border-b border-border/30">
-          <h2 className="text-lg font-semibold text-foreground">Важная правовая информация</h2>
+          <h2 className="text-lg font-semibold text-foreground">Маңызды құқықтық ақпарат</h2>
         </div>
         <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4 text-sm text-muted-foreground leading-relaxed custom-scrollbar">
           <div>
-            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Только информационные цели</h3>
-            <p>Настоящий сайт предоставлен исключительно в информационных целях и не является предложением о продаже, запросом на предложение или какой-либо формой инвестиционного совета. Доступ к данному сервису предоставляется только квалифицированным клиентам, соответствующим применимым критериям приемлемости, и заключившим соглашение об оказании услуг с Управляющая компания.</p>
+            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Тек ақпараттық мақсаттар үшін</h3>
+            <p>Бұл сайт тек ақпараттық мақсаттар үшін берілген және сату ұсынысы, ұсыныс сұрауы немесе инвестициялық кеңестің кез келген формасы болып табылмайды. Бұл қызметке қолжетімділік тек қолданыстағы жарамдылық критерийлеріне сай келетін және басқарушы компаниямен қызмет көрсету келісімін жасасқан білікті клиенттерге беріледі.</p>
           </div>
           <div>
-            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Не является инвестиционным советом</h3>
-            <p>Ничто на этом сайте не является инвестиционным, юридическим, налоговым или иным советом. Потенциальным клиентам следует проконсультироваться с собственными профессиональными советниками относительно пригодности данного сервиса для их обстоятельств.</p>
+            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Инвестициялық кеңес емес</h3>
+            <p>Бұл сайттағы ештеңе инвестициялық, құқықтық, салықтық немесе өзге кеңес болып табылмайды. Ықтимал клиенттер осы қызметтің өз жағдайлары үшін қолайлылығы туралы өз кәсіби кеңесшілерімен кеңессін.</p>
           </div>
           <div>
-            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Риск потерь</h3>
-            <p>Алгоритмическая торговля цифровыми активами сопряжена со значительными рисками, включая возможную потерю всей или значительной части вложенного капитала. Цифровые активы высоко волатильны и носят спекулятивный характер. Данный сервис подходит только для клиентов, которые могут позволить себе потерять всю аллокацию.</p>
+            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Шығын тәуекелі</h3>
+            <p>Цифрлық активтермен алгоритмдік сауда салынған капиталдың барлығын немесе едәуір бөлігін жоғалту мүмкіндігін қоса алғанда айтарлықтай тәуекелдермен байланысты. Цифрлық активтер жоғары өзгергіш және алыпсатарлық сипатта болады.</p>
           </div>
           <div>
-            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Прошлые результаты</h3>
-            <p>Прошлые результаты не являются показателем будущих результатов. Представленные на сайте данные отражают результаты реальной алгоритмической торговли. Исторические результаты не являются гарантией будущей доходности и не отражают влияние всех возможных рыночных сценариев на результаты стратегии.</p>
+            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Өткен нәтижелер</h3>
+            <p>Өткен нәтижелер не являются показателем будущих результатов. Представленные на сайте данные отражают результаты реальной алгоритмической торговли. Исторические результаты не являются гарантией будущей доходности и не отражают влияние всех возможных рыночных сценариев на результаты стратегии.</p>
           </div>
           <div>
-            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Отсутствие гарантий</h3>
-            <p>Нет гарантии, что стратегии достигнут своих целей. Целевая доходность и метрики риска являются целями, а не гарантиями. Существенные просадки могут возникать в неблагоприятных рыночных условиях.</p>
+            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Кепілдіктер жоқ</h3>
+            <p>Стратегиялардың өз мақсаттарына жетуіне кепілдік берілмейді. Мақсатты табыстылық пен тәуекел метрикалары — мақсаттар, кепілдіктер емес.</p>
           </div>
           <div>
-            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Биржевые и контрагентские риски</h3>
-            <p>Средства клиентов остаются на собственном субаккаунте клиента на бирже. Управляющая компания имеет только API-доступ для торговли без разрешения на вывод средств. Существует биржевой риск контрагента, включая возможность отказа биржи или нарушений безопасности, оценка которых лежит на клиенте.</p>
+            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Биржалық және контрагенттік тәуекелдер</h3>
+            <p>Клиент қаражаты клиенттің биржадағы жеке субаккаунтында қалады. Басқарушы компания тек сауда жасауға арналған API-қолжетімділікке ие, қаражатты шығару рұқсатынсыз. Биржаның сәтсіздігі немесе қауіпсіздік бұзылуын қоса алғанда биржалық контрагент тәуекелі бар.</p>
           </div>
           <div>
-            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Прогнозные заявления</h3>
-            <p>Этот сайт может содержать прогнозные заявления. Такие заявления подвержены рискам и неопределённостям, которые могут привести к существенным отличиям фактических результатов. Управляющая компания не берёт на себя обязательства по обновлению прогнозных заявлений.</p>
+            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Болжамды мәлімдемелер</h3>
+            <p>Бұл сайт болжамды мәлімдемелерді қамтуы мүмкін. Мұндай мәлімдемелер нақты нәтижелердің айтарлықтай өзгеруіне әкелуі мүмкін тәуекелдер мен белгісіздіктерге ұшырайды.</p>
           </div>
           <div>
-            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Доступ по инициативе клиента</h3>
-            <p>Содержание этого сайта доступно только лицам, получившим к нему доступ по собственной инициативе, без какого-либо прямого или косвенного привлечения со стороны Управляющая компания. Если вы не заходили на этот сайт по собственной инициативе, вам следует немедленно покинуть его.</p>
+            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Клиент бастамасымен қолжетімділік</h3>
+            <p>Бұл сайттың мазмұны тек өз бастамасымен кіруді алған тұлғаларға қолжетімді. Егер сіз бұл сайтқа өз бастамаңызбен кірмесеңіз, сіз оны дереу тастап кетуіңіз керек.</p>
           </div>
           <div>
-            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Ограниченные юрисдикции</h3>
-            <p>Информация на этом сайте не предназначена для распространения среди лиц или организаций в какой-либо юрисдикции или стране, где такое распространение или использование противоречило бы местному законодательству или нормативным требованиям.</p>
+            <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Шектелген юрисдикциялар</h3>
+            <p>Бұл сайттағы ақпарат осындай таратылым немесе пайдалану жергілікті заңнамаға қайшы болатын кез келген юрисдикцияда немесе елде тұлғаларға немесе ұйымдарға таратуға арналмаған.</p>
           </div>
         </div>
         <div className="px-6 py-4 border-t border-border/30 flex flex-col sm:flex-row gap-3 sm:justify-end">
@@ -1260,13 +1260,13 @@ function LegalDisclaimerModal() {
             onClick={() => window.location.href = "https://www.google.com"}
             data-testid="button-leave-site"
           >
-            Покинуть сайт
+            Сайттан шығу
           </Button>
           <Button
             onClick={() => setAccepted(true)}
             data-testid="button-accept-disclaimer"
           >
-            Принимаю
+            Қабылдаймын
           </Button>
         </div>
       </div>
@@ -1331,9 +1331,9 @@ export default function Home() {
         <div className="max-w-5xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-10">
-              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">Как устроена стратегия</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">Стратегия қалай құрылған</h2>
               <p className="text-muted-foreground text-sm max-w-2xl mx-auto">
-                15 торговых систем на 2 наиболее ликвидных парах — BTC и ETH. Полностью автоматизированное исполнение с встроенным контролем рисков.
+                Ең өтімді 2 жұпта 15 сауда жүйесі — BTC және ETH. Кірістірілген тәуекел бақылауымен толық автоматтандырылған орындау.
               </p>
             </div>
           </AnimatedSection>
@@ -1385,8 +1385,8 @@ export default function Home() {
         <div className="max-w-5xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-10">
-              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">Как это работает</h2>
-              <p className="text-muted-foreground text-sm max-w-lg mx-auto">Алготрейдинг через API биржи — просто и быстро</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">Қалай жұмыс істейді</h2>
+              <p className="text-muted-foreground text-sm max-w-lg mx-auto">Биржаның API арқылы алготрейдинг — қарапайым және жылдам</p>
             </div>
           </AnimatedSection>
           <div className="flex flex-col sm:grid sm:grid-cols-3 gap-3 sm:gap-6">
@@ -1415,8 +1415,8 @@ export default function Home() {
         <div className="max-w-5xl mx-auto">
           <AnimatedSection>
             <div className="text-center mb-10">
-              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">Почему алготрейдинг по API</h2>
-              <p className="text-muted-foreground text-sm max-w-lg mx-auto">Преимущества алгоритмической торговли</p>
+              <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">Неге API арқылы алготрейдинг</h2>
+              <p className="text-muted-foreground text-sm max-w-lg mx-auto">Алгоритмдік сауданың артықшылықтары</p>
             </div>
           </AnimatedSection>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
@@ -1443,7 +1443,7 @@ export default function Home() {
 
       <section className="py-12 px-4 sm:px-6 text-center">
         <div className="max-w-2xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">Готовы подключиться?</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">Қосылуға дайынсыз ба?</h2>
           <p className="text-muted-foreground text-sm mb-8 max-w-lg mx-auto">
             Командамызбен тікелей байланысыңыз. Стратегия, қосылу және онбординг процесі туралы айтып береміз.
           </p>
