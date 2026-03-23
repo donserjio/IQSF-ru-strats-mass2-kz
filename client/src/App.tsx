@@ -33,6 +33,13 @@ function Router() {
   useEffect(() => {
     const { lang: pathLang, strategy } = parsePath(location);
 
+  // Dynamic page title based on language
+  useEffect(() => {
+    document.title = lang === "kz"
+      ? "Алгоритмдік сауда стратегиясы | IQSF"
+      : "Алгоритмическая торговая стратегия | IQSF";
+  }, [lang]);
+
     // Sync lang from URL
     if (pathLang && pathLang !== lang) {
       setLang(pathLang);
@@ -50,6 +57,13 @@ function Router() {
   }, [location]);
 
   const { lang: pathLang, strategy } = parsePath(location);
+
+  // Dynamic page title based on language
+  useEffect(() => {
+    document.title = lang === "kz"
+      ? "Алгоритмдік сауда стратегиясы | IQSF"
+      : "Алгоритмическая торговая стратегия | IQSF";
+  }, [lang]);
   const activeLang = pathLang ?? lang;
   const HomePage = activeLang === "kz" ? HomeKz : Home;
 
