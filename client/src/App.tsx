@@ -38,12 +38,12 @@ function Router() {
       setLang(pathLang);
     } else if (!pathLang && lang !== "kz") {
       // Default to kz
-      setLang("kz");
+      setLang("ru");
     }
 
     // Redirect legacy or root URLs to canonical form
     if (!pathLang) {
-      const targetLang = pathLang ?? "kz";
+      const targetLang = pathLang ?? "ru";
       const targetStrategy = strategy ?? "algo-momentum";
       setLocation(`/${targetLang}/${targetStrategy}`);
     }
@@ -78,7 +78,7 @@ function AppInner() {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <LanguageProvider defaultLang="kz">
+      <LanguageProvider defaultLang="ru">
         <AppInner />
       </LanguageProvider>
     </QueryClientProvider>

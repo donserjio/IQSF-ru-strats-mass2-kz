@@ -1402,7 +1402,7 @@ function getStrategyFromPath(): StrategyKey {
     slug = rawParts[1] ?? "";
   }
   if (slug && !STRATEGY_SLUG_MAP[slug]) {
-    const langPrefix = rawParts[0] === "ru" ? "ru" : "kz";
+    const langPrefix = rawParts[0] === "kz" ? "kz" : "ru";
     window.history.replaceState(null, "", "/" + langPrefix + "/algo-momentum");
   }
   return STRATEGY_SLUG_MAP[slug] || "basket50";
@@ -1418,7 +1418,7 @@ export default function Home() {
   const setStrategy = useCallback((key: StrategyKey) => {
     setStrategyState(key);
     const rawParts = window.location.pathname.replace(/^\//, "").split("/").filter(Boolean);
-    const langPrefix = rawParts[0] === "ru" ? "ru" : "kz";
+    const langPrefix = rawParts[0] === "kz" ? "kz" : "ru";
     setLocation("/" + langPrefix + "/" + STRATEGY_URL_MAP[key]);
   }, [setLocation]);
   const sc = STRATEGIES[strategy];
