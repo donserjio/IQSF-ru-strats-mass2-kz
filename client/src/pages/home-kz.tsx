@@ -573,8 +573,8 @@ function HeroSection({ stats, sc }: { stats?: StatsData; sc: StrategyConfig }) {
               <div className="grid grid-cols-3 divide-x divide-border/20 rounded-xl border border-border/30 bg-card/30 backdrop-blur-sm mt-4">
                 {[
                   { label: lang === "kz" ? "Жылдық табыс" : "Жылдық табыс", value: getMetricValue(stats?.metrics, "CAGR", "—") },
-                  { label: lang === "kz" ? "Sharpe Ratio" : "Sharpe Ratio", value: getMetricValue(stats?.metrics, "Sharpe", "—") },
-                  { label: lang === "kz" ? "Track Record" : "Track Record", value: stats?.dateRange ? stats.dateRange.replace(/.*?(\d{4}).*?(\d{4}).*/, "$1–$2") : "—" },
+                  { label: "Шарп коэффициенті", value: getMetricValue(stats?.metrics, "Sharpe", "—") },
+                  { label: "Трек-рекорд", value: stats?.dateRange ? stats.dateRange.replace(/.*?(\d{4}).*?(\d{4}).*/, "$1–$2") : "—" },
                 ].map((item) => (
                   <div key={item.label} className="text-center py-5">
                     <div className="text-lg sm:text-xl font-bold text-foreground font-mono">{item.value}</div>
