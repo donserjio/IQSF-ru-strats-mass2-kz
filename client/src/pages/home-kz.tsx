@@ -886,10 +886,10 @@ function EquityChartSection({ stats, isLoading, strategyKey }: { stats?: StatsDa
         <AnimatedSection>
           <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3">
-              Нәтижелер стратегии
+              Стратегия нәтижелері
             </h2>
             <p className="text-muted-foreground text-sm max-w-lg mx-auto">
-              Капитал өсімі және стратегия эквитиі
+              Капитал өсімі және стратегия эквиті
             </p>
             <LiveDataBadge text={t("Күн сайын жаңартылады · Binance API")} />
           </div>
@@ -1231,7 +1231,7 @@ function LegalDisclaimerModal() {
           </div>
           <div>
             <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Өткен нәтижелер</h3>
-            <p>Өткен нәтижелер не являются показателем будущих результатов. Представленные на сайте данные отражают результаты реальной алгоритмической торговли. Исторические результаты не являются гарантией будущей доходности и не отражают влияние всех возможных рыночных сценариев на результаты стратегии.</p>
+            <p>Өткен нәтижелер болашақ нәтижелердің көрсеткіші болып табылмайды. Сайтта ұсынылған деректер нақты алгоритмдік сауданың нәтижелеріне негізделген. Тарихи нәтижелер болашақ табыстылықтың кепілі болып табылмайды.</p>
           </div>
           <div>
             <h3 className="text-xs font-semibold text-foreground uppercase tracking-wider mb-2">Кепілдіктер жоқ</h3>
