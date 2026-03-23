@@ -1059,7 +1059,7 @@ function EquityChartSection({ stats, isLoading, strategyKey }: { stats?: StatsDa
             <div className="flex items-center justify-between mb-4 flex-wrap gap-3">
               <h3 className="text-sm font-semibold text-foreground">Табыстылық қисығы</h3>
               {equityRaw.length > 0 && (
-                <ChartPeriodFilter allData={equityRaw} onFilter={setFilteredData} rebaseOnFilter additiveRebase />
+                <ChartPeriodFilter allData={equityRaw} onFilter={setFilteredData} rebaseOnFilter />
               )}
             </div>
             {isLoading ? (
